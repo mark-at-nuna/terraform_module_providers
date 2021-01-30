@@ -11,6 +11,10 @@ provider aws {
 resource "null_resource" "dependency" {}
 
 module "first" {
+  providers = {
+    aws.first_west = aws.root_west
+    aws.first_east = aws.root_east
+  }
   source = "./local_modules/first_module"
   depends_on = [null_resource.dependency]
 }
